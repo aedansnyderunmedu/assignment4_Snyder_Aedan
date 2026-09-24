@@ -1,4 +1,4 @@
-#ifndef ITEM_H
+#ifndef ITEM_H //include guards
 #define ITEM_H
 struct _Item
 {
@@ -9,5 +9,5 @@ struct _Item
 };
 typedef struct _Item Item;
 
-#endif
+#endif//
 
