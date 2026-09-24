@@ -3,7 +3,7 @@
 #include <string.h>
 #include "item.h"
 
-void add_items(Item *item_list, double price, *char sku, *char category, *char name, int index) //each struct/field given enough memory via malloc.
+void add_items(Item *item_list, double price, char *sku, char *category, char *name, int index) //each struct/field given enough memory via malloc.
 {
 	item_list[index].price = price;
 	
@@ -49,8 +49,9 @@ void free_items(Item *item_list, int size)
 		free(item_list[i].name);
 	}
 	free(item_list); //freeing item_list entirely, after loop closure. 
+}
 
-int main(argc, argv[])
+int main(int argc, char *argv[])
 {
 	if(argc < 2)
 	{
@@ -72,7 +73,7 @@ int main(argc, argv[])
 	char *sku = argv[1]; //user-entered sku set for comparison
 	int ct = 0; //count variable
 	
-	while(ct < 5 && strcmp(item_list[ct].sku, sku) != 0) //AND (&&) operator stops comparison as soon as the left-handed argument is false. This is why reversing operands can cause problems/bugs/crashes. 
+	while(ct < 5 && strcmp(item_list[ct].sku, sku) != 0) //AND (&&) operator reads LEFT to RIGHT. if strcmp happens BEFORE the loop verifies ct < 5, it can read values outside of allocated mem. Can read garbage or crash. 
 	{
 		ct++;
 	}
